@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>All Courses</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<h1 th:text="${set}"></h1>
+<body>
+
+    <th:block th:if="${kpacs!=null and !kpacs.isEmpty()}" >
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Time</th>
+            <th>Info</th>
+        </tr>
+        </thead>
+        <tr th:if="${kpacs!=null and !kpacs.isEmpty()}" th:each="kpac : ${kpacs}">
+            <td th:text="${kpac.id}"></td>
+            <td th:text="${kpac.title}"></td>
+            <td th:text="${kpac.description}"></td>
+            <td th:text="${kpac.newDate}"></td>
+            <td>
+                <a th:href="@{/kpacs/delete(id=${kpac.id})}"
+                   onclick="if(!(confirm('are you sure you want delete sets?')))return false">delete</a>
+            </td>
+            </td>
+        </tr>
+    </table> :
+
+    </th:block>
+
+
+    <th:block th:unless="${!kpacs.isEmpty()}">
+        <h2>No one sets k-pacs</h2>
+    </th:block>
+
+
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+    <title>All Courses</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+</head>
+
+<body>
+<div class="container col-8">
+    <h2>All K-Pac</h2>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Time</th>
+            <th>Info</th>
+        </tr>
+        </thead>
+
+        <tr th:each="tempKpac : ${kpacs}">
+            <td th:text="${tempKpac.id}"></td>
+            <td th:text="${tempKpac.title}"></td>
+            <td th:text="${tempKpac.description}"></td>
+            <td th:text="${tempKpac.newDate}"></td>
+            <td>
+                <a th:href="@{/kpacs/delete(id=${tempKpac.id})}"
+                   onclick="if(!(confirm('are you sure you want delete sets?')))return false">delete</a>
+            </td>
+
+            </td>
+        </tr>
+    </table>
+
+    <br>
+    <h2>Add new K-PAC</h2>
+    <form th:action="@{/kpacs/save}" method="POST"
+          th:object="${kpac}">
+
+
+        <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            <input type="text" th:field="*{title}"  class="form-control" id="exampleFormControlInput1" placeholder="title">
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+            <input type="text" th:field="*{description}" placeholder="description" class="form-control" id="exampleFormControlTextarea1">
+        </div>
+
+
+        <button type="submit" class="btn btn-primary mb-3">Save</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
