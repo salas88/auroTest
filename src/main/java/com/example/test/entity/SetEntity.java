@@ -71,6 +71,6 @@ public class SetEntity {
 
     @Override
     public String toString() {
-        return "SetEntity with id: " + id + "title: " + title;
+        return "SetEntity with id: " + id + " title: " + title;
     }
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="www.thymeleaf.org">
 <head>
-    <title>All Courses</title>
+    <title>Set page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <style>
         tr{
@@ -23,18 +23,18 @@
         </thead>
 
 
-            <tr th:each="set : ${sets}"
-                th:onclick="'javascript:rowClicked(\'' + ${set.id} + '\');'">
+            <tr th:each="set : ${sets}">
 
-                    <td th:text="${set.id}"></td>
-                    <td th:text="${set.title}"></td>
+
+                    <td th:text="${set.id}" th:onclick="'javascript:rowClicked(\'' + ${set.id} + '\');'"></td>
+                    <td th:text="${set.title}" th:onclick="'javascript:rowClicked(\'' + ${set.id} + '\');'"></td>
 
                     <td>
                         <a th:href="@{/sets/delete(id=${set.id})}"
-                           onclick="if(!(confirm('are you sure you want delete kpac?')))return false">delete</a>
+                           onclick="if(!(confirm('are you sure you want delete set?')))return false">delete</a>
                     </td>
 
-                    </td>
+
             </tr>
     </table>
 
@@ -57,15 +57,12 @@
         </div>
         <div th:unless="${!kpacs.isEmpty()}">
             <h4>there is not one k-pac </h4>
-            <a th:href="@{/kpacs}">Add K-Pac</a>
+
         </div>
-
-
-
-
+        <a th:href="@{/kpacs}">Add K-Pac</a>
         <button type="submit" class="btn btn-primary mb-3">Save</button>
-
     </form>
+
 </div>
 <script>
     function rowClicked(value) {

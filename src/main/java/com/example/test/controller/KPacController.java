@@ -15,10 +15,11 @@ public class KPacController {
 
     @GetMapping()
     public String getAllObject(Model theModel){
+        
 
         theModel.addAttribute("kpac", new KPAC());
         theModel.addAttribute("kpacs", kpacService.findAll());
-        return "main-page";
+        return "kpacs";
     }
 
     @GetMapping("/delete")
