@@ -3,7 +3,13 @@
 <head>
     <title>K-Pac</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <style>
+        .pagination{
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
@@ -11,11 +17,15 @@
     <h2>All K-Pac</h2>
     <table class="table">
         <thead class="thead-dark">
+
+        <div><i>Sorted by [[${sortField}]] in [[${sortDir}]] order</i></div>
         <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Time</th>
+            <th>
+                <a th:href="@{'/kpacs/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}"> ID</a>
+            </th>
+            <th><a th:href="@{'/kpacs/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">Title</a></th>
+            <th><a th:href="@{'/kpacs/page/' + ${currentPage} + '?sortField=description&sortDir=' + ${reverseSortDir}}">Description</a></th>
+            <th><a th:href="@{'/kpacs/page/' + ${currentPage} + '?sortField=createdAt&sortDir=' + ${reverseSortDir}}">Time</a></th>
             <th>Info</th>
         </tr>
         </thead>
@@ -33,6 +43,23 @@
             </td>
         </tr>
     </table>
+
+    <div class="pagination">
+        <a th:if="${currentPage > 1}" th:href="@{'/kpacs/page/1'+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">First</a>
+        <span th:unless="${currentPage > 1}">First</span>
+        <a th:if="${currentPage > 1}" th:href="@{'/kpacs/page/' + ${currentPage - 1}+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
+        <span th:unless="${currentPage > 1}">Previous</span>
+        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+    <a th:if="${currentPage != i}" th:href="@{'/kpacs/page/' + ${i}+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+    <span th:unless="${currentPage != i}">[[${i}]]</span>
+    &nbsp;
+</span>
+
+        <a th:if="${currentPage < totalPages}" th:href="@{'/kpacs/page/' + ${currentPage + 1}+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+        <span th:unless="${currentPage < totalPages}">Next</span>
+        <a th:if="${currentPage < totalPages}" th:href="@{'/kpacs/page/' + ${totalPages}+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+        <span th:unless="${currentPage < totalPages}">Last</span>
+    </div>
 
     <br>
     <h2>Add new K-PAC</h2>
@@ -58,9 +85,7 @@
     <div>
         <a th:href="@{/sets}">Go to Sets page</a>
     </div>
+
 </div>
-
-
-
 </body>
 </html>
