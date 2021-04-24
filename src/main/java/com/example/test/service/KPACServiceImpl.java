@@ -1,9 +1,7 @@
 package com.example.test.service;
 
 import com.example.test.dao.KPACDao;
-import com.example.test.dao.SetEntityDao;
 import com.example.test.entity.KPAC;
-import com.example.test.entity.SetEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 
 @Service
 public class KPACServiceImpl implements KPACService{
@@ -42,7 +39,7 @@ public class KPACServiceImpl implements KPACService{
     }
 
     @Override
-        public Page<KPAC> listAll(int pageNum,String sortField, String sortDir) {
+    public Page<KPAC> listAll(int pageNum,String sortField, String sortDir) {
         int pageSize = 10;
 
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize,
@@ -50,5 +47,5 @@ public class KPACServiceImpl implements KPACService{
                         : Sort.by(sortField).descending());
 
         return dao.findAll(pageable);
-    }
+}
 }

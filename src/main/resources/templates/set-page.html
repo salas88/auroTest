@@ -7,6 +7,12 @@
         tr{
             cursor: pointer;
         }
+         .pagination{
+             margin-left: auto;
+             margin-right: auto;
+             display: block;
+         }
+
     </style>
 </head>
 
@@ -15,9 +21,10 @@
     <h2>All Sets K-Pac</h2>
     <table class="table">
         <thead class="thead-dark">
+        <div><i>Sorted by [[${sortField}]] in [[${sortDir}]] order</i></div>
         <tr>
-            <th>#</th>
-            <th>Title</th>
+            <th><a th:href="@{'/sets/page/' + ${currentPage} + '?sortField=id&sortDir=' + ${reverseSortDir}}">Id</a></th>
+            <th><a th:href="@{'/sets/page/' + ${currentPage} + '?sortField=title&sortDir=' + ${reverseSortDir}}">Title</a></th>
             <th>Info</th>
         </tr>
         </thead>
@@ -37,6 +44,23 @@
 
             </tr>
     </table>
+    <div class="pagination">
+        <a th:if="${currentPage > 1}" th:href="@{'/sets/page/1'+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">First</a>
+        <span th:unless="${currentPage > 1}">First</span>
+        <a th:if="${currentPage > 1}" th:href="@{'/sets/page/' + ${currentPage - 1}+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Previous</a>
+        <span th:unless="${currentPage > 1}">Previous</span>
+        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+    <a th:if="${currentPage != i}" th:href="@{'/sets/page/' + ${i}+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+    <span th:unless="${currentPage != i}">[[${i}]]</span>
+    &nbsp;
+</span>
+
+        <a th:if="${currentPage < totalPages}" th:href="@{'/sets/page/' + ${currentPage + 1}+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+        <span th:unless="${currentPage < totalPages}">Next</span>
+        <a th:if="${currentPage < totalPages}" th:href="@{'/sets/page/' + ${totalPages}+'?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+        <span th:unless="${currentPage < totalPages}">Last</span>
+    </div>
+
 
 
     <h2>Add new Set K-PAC</h2>
@@ -62,8 +86,8 @@
         <a th:href="@{/kpacs}">Add K-Pac</a>
         <button type="submit" class="btn btn-primary mb-3">Save</button>
     </form>
-
 </div>
+
 <script>
     function rowClicked(value) {
         window.open('http://localhost:8080' + '/set?id=' + value);

@@ -26,12 +26,12 @@
             <td th:text="${kpac.description}"></td>
             <td th:text="${kpac.newDate}"></td>
             <td>
-                <a th:href="@{/kpacs/delete(id=${kpac.id})}"
+                <a th:href="@{/set/delete(id=${kpac.id})}"
                    onclick="if(!(confirm('are you sure you want delete sets?')))return false">delete</a>
             </td>
             </td>
         </tr>
-    </table> :
+    </table>
 
     </th:block>
 
@@ -40,7 +40,9 @@
         <h2>No one sets k-pacs</h2>
     </th:block>
 
-
+<div>
+    <a th:href="@{/sets}">Back to sets</a>
+</div>
 
 </body>
 </html>

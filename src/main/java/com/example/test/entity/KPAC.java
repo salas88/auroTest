@@ -21,12 +21,9 @@ public class KPAC {
     @Column(name="createadAt", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date createdAt;
 
-    @ManyToMany
-    @JoinTable(name = "set_kpacs",
-            joinColumns = @JoinColumn(name = "id_kpac"),
-            inverseJoinColumns = @JoinColumn(name = "id_set_entity"))
-    private List<KPAC> kpacs;
-
+    @ManyToMany(mappedBy = "kpacs" ,cascade = {CascadeType.DETACH,CascadeType.MERGE,
+                            CascadeType.PERSIST,CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    private List<SetEntity> setEntityList;
 
     @Transient
     private String newDate;
@@ -82,12 +79,12 @@ public class KPAC {
         this.newDate = newDate ;
     }
 
-    public List<KPAC> getKpacs() {
-        return kpacs;
+    public List<SetEntity> getKpacs() {
+        return setEntityList;
     }
 
-    public void setKpacs(List<KPAC> kpacs) {
-        this.kpacs = kpacs;
+    public void setKpacs(List<SetEntity> setEntityList) {
+        this.setEntityList = setEntityList;
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.example.test.entity;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,21 +16,16 @@ public class SetEntity {
     private Integer id;
     private String title;
 
-    @ManyToMany(cascade = { CascadeType.DETACH,
-                            CascadeType.MERGE,
-                            CascadeType.PERSIST,
-                            CascadeType.REFRESH},
+    @ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,
+                           CascadeType.PERSIST,CascadeType.REFRESH},
                 fetch = FetchType.EAGER)
     @JoinTable(name = "set_kpacs",
             joinColumns = @JoinColumn(name = "id_set_entity"),
             inverseJoinColumns = @JoinColumn(name = "id_kpac"))
     private List<KPAC> kpacs;
 
-    public void addKpac(KPAC kpac) {
-        if (kpacs == null) {
-            kpacs = new ArrayList<>();
-        }
-        kpacs.add(kpac);
+    public void deleteByid(int id){
+        kpacs.remove(id);
     }
 
     public SetEntity(String title) {

@@ -15,10 +15,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/kpacs")
 public class KPacController {
+
     @Autowired
     private KPACService kpacService;
-    @Autowired
-    private KPACDao kpacDao;
 
     @GetMapping("/page/{pageNum}")
     public String viewPage(Model model,
