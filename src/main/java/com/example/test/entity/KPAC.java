@@ -71,7 +71,6 @@ public class KPAC {
 
 
     public String getNewDate() {
-
         return new SimpleDateFormat("dd-MM-yyyy").format(getCreatedAt());
     }
 

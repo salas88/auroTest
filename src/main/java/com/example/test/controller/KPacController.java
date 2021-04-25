@@ -1,6 +1,5 @@
 package com.example.test.controller;
 
-import com.example.test.dao.KPACDao;
 import com.example.test.entity.KPAC;
 import com.example.test.service.KPACService;
 import org.springframework.beans.factory.annotation.Autowired;
